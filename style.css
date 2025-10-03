@@ -1,0 +1,147 @@
+/* General look */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #1f0036, #090979, #00d4ff);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+/* Center container */
+.container {
+  text-align: center;
+  background: rgba(0,0,0,0.4);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 20px rgba(255,255,255,0.2);
+  width: 350px;
+}
+
+/* Title */
+.container h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #ffea00;
+  text-shadow: 0 0 10px #ffea00, 0 0 20px #ffea00;
+}
+
+/* Input field */
+#name {
+  width: 80%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 1.1em;
+  text-align: center;
+}
+
+/* Buzz button */
+#buzz {
+  width: 200px;
+  height: 200px;
+  font-size: 2em;
+  font-weight: bold;
+  border: none;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #ff0040, #a3001e);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 20px #ff0040, 0 0 40px #ff0040;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Buzz hover effect */
+#buzz:hover {
+  transform: scale(1.1);
+  background: radial-gradient(circle at center, #ff335f, #cc002f);
+  box-shadow: 0 0 30px #ff335f, 0 0 60px #ff335f;
+}
+
+
+/* Global background */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #1f0036, #090979, #00d4ff);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+/* Host container */
+.host-container {
+  text-align: center;
+  background: rgba(0,0,0,0.4);
+  padding: 40px 60px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 30px rgba(255,255,255,0.2);
+}
+
+/* Main title */
+.host-container h1 {
+  font-size: 3em;
+  color: #ffea00;
+  text-shadow: 0 0 15px #ffea00, 0 0 25px #ffea00;
+  margin-bottom: 30px;
+}
+
+/* Winner name */
+#winner {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #00ff9d;
+  text-shadow: 0 0 15px #00ff9d, 0 0 30px #00ff9d;
+}
+
+/* Reset button */
+#reset {
+  padding: 15px 40px;
+  font-size: 1.3em;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(45deg, #ff0040, #ff6600);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 20px #ff3300, 0 0 40px #ff6600;
+  transition: transform 0.2s ease-in-out;
+}
+
+#reset:hover {
+  transform: scale(1.1);
+  background: linear-gradient(45deg, #ff335f, #ff9933);
+}
+
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+#onBtn {
+  padding: 15px 40px;
+  font-size: 1.3em;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(45deg, #00cc66, #00ff99);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 20px #00ff99, 0 0 40px #00cc66;
+  transition: transform 0.2s ease-in-out;
+}
+
+#onBtn:hover {
+  transform: scale(1.1);
+  background: linear-gradient(45deg, #00e67a, #33ffad);
+}

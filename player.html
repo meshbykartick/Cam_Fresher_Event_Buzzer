@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Player Buzzer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Player Buzzer</h2>
+    <input id="name" placeholder="Enter your name">
+    <button id="buzz">🚨 BUZZ!</button>
+    <p id="statusMsg"></p>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBTDfi7ZgHysLlZRcwiG4pUnZXqe04tqvM",
+      authDomain: "buzzer-for-quiz-2e843.firebaseapp.com",
+      databaseURL: "https://buzzer-for-quiz-2e843-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "buzzer-for-quiz-2e843",
+      storageBucket: "buzzer-for-quiz-2e843.firebasestorage.app",
+      messagingSenderId: "976959469529",
+      appId: "1:976959469529:web:d4d13b483c8bd644808bc8",
+      measurementId: "G-5ET84S44WT"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    let buzzersEnabled = false;
+
+    // Listen for buzzer ON/OFF
+    onValue(ref(db, "buzzer/enabled"), (snapshot) => {
+      buzzersEnabled = snapshot.val() === true;
+      document.getElementById("statusMsg").innerText = buzzersEnabled ? "✅ Buzzers are OPEN!" : "⛔ Buzzers are LOCKED!";
+    });
+
+    document.getElementById("buzz").onclick = async () => {
+      const name = document.getElementById("name").value || "Unknown";
+
+      if (!buzzersEnabled) {
+        document.getElementById("statusMsg").innerText = "⛔ You cannot buzz yet!";
+        return;
+      }
+
+      const snap = await get(ref(db, "buzzer/first"));
+      if (!snap.exists()) {
+        set(ref(db, "buzzer/first"), name);
+      }
+    };
+  </script>
+</body>
+</html>

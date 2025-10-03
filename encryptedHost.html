@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Host Screen</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="host-container">
+    <h1>Buzzer Results</h1>
+    <h2 id="winner">Waiting...</h2>
+
+    <!-- Password Login -->
+    <input type="password" id="hostPass" placeholder="Enter Host Password">
+    <button id="loginBtn">Login</button>
+
+    <!-- Host controls hidden initially -->
+    <div class="controls" id="hostControls" style="display:none;">
+      <button id="onBtn">🔔 ON</button>
+      <button id="reset">🔄 Reset</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBTDfi7ZgHysLlZRcwiG4pUnZXqe04tqvM",
+      authDomain: "buzzer-for-quiz-2e843.firebaseapp.com",
+      databaseURL: "https://buzzer-for-quiz-2e843-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "buzzer-for-quiz-2e843",
+      storageBucket: "buzzer-for-quiz-2e843.firebasestorage.app",
+      messagingSenderId: "976959469529",
+      appId: "1:976959469529:web:d4d13b483c8bd644808bc8",
+      measurementId: "G-5ET84S44WT"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Password Authentication
+    const correctPass = "QUIZMASTER123"; // <-- set your host password here
+    const hostControls = document.getElementById("hostControls");
+
+    document.getElementById("loginBtn").onclick = () => {
+      const pass = document.getElementById("hostPass").value;
+      if(pass === correctPass){
+        hostControls.style.display = "flex";
+        document.getElementById("hostPass").style.display = "none";
+        document.getElementById("loginBtn").style.display = "none";
+        alert("Host authenticated!");
+      } else {
+        alert("Wrong password!");
+      }
+    };
+
+    // Display winner live
+    onValue(ref(db, "buzzer/first"), (snapshot) => {
+      if (snapshot.exists()) {
+        document.getElementById("winner").innerText = "🏆 Winner: " + snapshot.val();
+      } else {
+        document.getElementById("winner").innerText = "Waiting...";
+      }
+    });
+
+    // Reset button clears results
+    document.getElementById("reset").onclick = () => {
+      set(ref(db, "buzzer"), { enabled: false });
+    };
+
+    // ON button enables buzzing
+    document.getElementById("onBtn").onclick = () => {
+      set(ref(db, "buzzer"), { enabled: true });
+      document.getElementById("winner").innerText = "Buzzers are OPEN!";
+    };
+  </script>
+</body>
+</html>
